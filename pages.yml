@@ -1,0 +1,32 @@
+- title: "Beginner Guides"
+  url: 'index'
+  skip_toc: true
+  pages:
+    - title: "Authmaker Beginner Guides"
+      url: ""
+
+- title: "Getting Started"
+  url: 'getting-started'
+  pages:
+    - title: "Prerequisites"
+      url: "index"
+    - title: "Ember Application"
+      url: "ember-app"
+    - title: "Start with your Ember application"
+      url: "back-end"
+    - title: "Define the schema"
+      url: "define-schema"
+    - title: "Create your routes"
+      url: "create-routes"
+    - title: "Add an Ember application adapter"
+      url: "application-adapter"
+    - title: "Create a database sandbox online"
+      url: "create-database"
+    - title: "Create an Authmaker instance"
+      url: "authmaker-instance"
+    - title: "Add Authmaker authentication to your Ember app"
+      url: "add-authmaker"
+    - title: "Add authorization details to backend"
+      url: "backend-config"
+    - title: "Deploy"
+      url: "deploy"
