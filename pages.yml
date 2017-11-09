@@ -1,0 +1,14 @@
+- title: "Beginner Guides"
+  url: 'index'
+  skip_toc: true
+  pages:
+    - title: "Authmaker Beginner Guides"
+      url: ""
+
+- title: "Getting Started"
+  url: 'getting-started'
+  pages:
+    - title: "Prerequisites"
+      url: "index"
+    - title: "Ember Application"
+      url: "ember-app"

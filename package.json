@@ -1,0 +1,19 @@
+{
+  "name": "@authmaker/guides-source",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Authmaker/documentation.git"
+  },
+  "author": "",
+  "license": "UNLICENCED",
+  "bugs": {
+    "url": "https://github.com/Authmaker/documentation/issues"
+  },
+  "homepage": "https://github.com/Authmaker/documentation#readme"
+}

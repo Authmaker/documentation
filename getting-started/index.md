@@ -2,54 +2,6 @@
 
  This guide will walk you through using Authmaker to implement a backend for your Ember application.  For this example, we will create a server and add authentication to a simple blogging app.
 
-## Prerequisites
-
-#### Yeoman
-
-[Yeoman](http://yeoman.io/) is a tool for easily generating project scaffolding. To check if you have Yeoman already installed, run `yo --version`, otherwise install it globally via npm:
-```bash
-$ npm install -g yo
-```
-#### Stonecircle Express Generator
-Authmaker uses a dedicated Yeoman generator to create your server application structure.
-```bash
-$ npm install -g @stonecircle/generator-express
-```
-
-#### PM2
-[PM2](http://pm2.keymetrics.io/) is a process manager for Node.js applications. We will use it as we develop our server.
- ```bash
- $ npm install -g pm2
- ```
- 
-#### mLab
-[mLab](https://mlab.com/) provides free online sandbox MongoDB databases for development and prototyping. You will need to create a free mLab account in order to create a development database later in this guide.
-
-## Start with your Ember application
-In this guide, we are building a blogging app with two basic models - **posts** and **authors**. Our models are defined in our Ember app as follows:
-```javascript
-// app/models/post.js
-
-import DS from 'ember-data';
-
-export default DS.Model.extend({
-    title: DS.attr('string'),
-    body: DS.attr('string'),
-    author: DS.belongsTo('user'),
-});
-```
-```javascript
-// app/models/user.js
-
-import DS from 'ember-data';
-
-export default DS.Model.extend({
-    username: DS.attr('string'),
-    posts: DS.hasMany('post'),
-});
-```
-This guide assumes a basic understanding of building with Ember. Our blogging app contains routes for viewing and creating posts and uses Ember Data to handle our requests. To view the detailed steps for creating our frontend app with Ember, click here.
-
 ## Creating your backend app
 From the terminal, create a new directory for our backend application and change into it.
 ```bash
@@ -80,7 +32,7 @@ $ npm install
 ```
 The generator will create two example files for reference, an 'example' model in the models folder and an 'example' route in the server/routes folder. You can use these for reference and eventually delete them.
 
-## Define the schema 
+## Define the schema
 
 Similar to defining models with Ember, we need to define the schema for the model objects in our database. [Mongoose](http://mongoosejs.com/index.html) is a library that allows us to model data for MongoDB. In our models folder, create `post.js` and define the schema for the post model:
 
@@ -92,7 +44,7 @@ const mongoose = require('mongoose');
 const { Schema } = mongoose;
 
 const schema = new mongoose.Schema({
-  title: String, 
+  title: String,
   body: String,
   author: { type: Schema.Types.ObjectId, ref: 'User' },
 });
@@ -124,12 +76,12 @@ module.exports.autoroute = autorouteJson({
 ```
 EXPLAIN MORE HERE about this default behaviour and how now we can perform CRUD actions for posts. And that we have not yet added authentication or authorisation, which is in the next steps.
 
-## Add an Ember application adapter 
-Return to your Ember application and create an application adapter. 
+## Add an Ember application adapter
+Return to your Ember application and create an application adapter.
 ```bash
 $ ember g adapter application
 ```
-In this file we will specify the host and namespace that Ember Data should use when making requests for data. 
+In this file we will specify the host and namespace that Ember Data should use when making requests for data.
 ```javascript
 import DS from 'ember-data';
 
@@ -143,7 +95,7 @@ Since we are in development and running our server locally, the host will be `ht
 ## Create a database sandbox online
 If you have not already created a free [mLab](https://mlab.com/) account, sign up now. Once signed up, create a new database for this project using their free Sandbox plan. TODO: Do we explicitly say to use Google Cloud Platform when mLab asks for cloud provider?  
 
-After creating the database, click to view it's details. Under the 'Users' tab, create a new user for your database with a password. You will use these credentials to allow Authmaker access to your database. 
+After creating the database, click to view it's details. Under the 'Users' tab, create a new user for your database with a password. You will use these credentials to allow Authmaker access to your database.
 
 While viewing your newly created database details, you will notice instructions at the top of the page for connecting. They will look something like this:
 ```
@@ -156,7 +108,7 @@ You won't need to connect using the mongo shell, but you will need to take note 
 Visit [app.authmaker.com](https://app.authmaker.com) and create an account. From your dashboard, create a new Authmaker instance for this project. Fill out the the required details:
 
 ##### Name
-Choose a name for this project instance. 
+Choose a name for this project instance.
 (example: 'myblog')
 
 ##### Application Domain
@@ -166,16 +118,16 @@ Since our app is still in development and not hosted online yet, this can be a p
 TODO: explain here about the other social logins? Facebook login requires a facebook developer account yes? I haven't actually gone through those steps yet.
 
 ##### Database Credentials
-As mentioned in the previous step, we need to provide some information about our mLab sandbox. 
+As mentioned in the previous step, we need to provide some information about our mLab sandbox.
 
 - **Database Name & Port:**
-Here we will use the information provided by mLab (see previous step). In this example our database name is 'my-blog' and the port is 27017. 
+Here we will use the information provided by mLab (see previous step). In this example our database name is 'my-blog' and the port is 27017.
 
-- **User & Password:** 
+- **User & Password:**
 Input the user and password we created for our database in the previous step. (Note: These are not your personal mLab account credentials.)
 
-- **Database Hosts:** 
-Again we will use the mLab information from the previous step. Our database is hosted at 'ds123456.mlab.com'. EXPLAIN more about adding multiple hosts?? 
+- **Database Hosts:**
+Again we will use the mLab information from the previous step. Our database is hosted at 'ds123456.mlab.com'. EXPLAIN more about adding multiple hosts??
 
 After successfully creating your Authmaker instance, you will have access to two unique configuration objects, one for development and one for production. We will use these to configure our Ember app to work with Authmaker.
 
@@ -202,13 +154,13 @@ Open your config/environment.js file and include the configuration details provi
 ...
 
  if (environment === 'development') {
-      ENV.authmaker = { 
+      ENV.authmaker = {
       domainUrl: "https://your-app-name.authmaker.com",
       redirectUri: "http://localhost:4200/login",
-      clientId: "yourClientId" 
+      clientId: "yourClientId"
       };;
   }
-  
+
 ...
 ```
 
@@ -322,7 +274,7 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
 
 ## Add authorization details to backend (rename this)
 
-Switch back to the directory for our server, `blog-backend`, to implement the final steps. 
+Switch back to the directory for our server, `blog-backend`, to implement the final steps.
 
 #### Add correct info to development.json
 
@@ -433,4 +385,4 @@ TODO: where is best place to include this?
 Create your first user for your development application.
 
 
-## Deploy / Production 
+## Deploy / Production
