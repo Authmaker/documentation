@@ -1,4 +1,6 @@
-## Add Authmaker authentication to your Ember app
+---
+title: Add Authmaker authentication
+---
 
 Switch to your Ember application's directory. From here we will work on adding Authmaker authentication to our frontend application.
 
@@ -13,7 +15,7 @@ $ ember install authmaker-ember-simple-auth
 
 #### Add Authmaker config
 
-Open your config/environment.js file and include the configuration details provided by Authmaker when you created your instance. (Make sure to use the  _local_ configuration for now.)
+Open `config/environment.js` and include the configuration details provided by Authmaker when you created your instance. (Make sure to use the  _local_ configuration for now.)
 
 ```javascript
 // config/environment.js
@@ -31,12 +33,14 @@ Open your config/environment.js file and include the configuration details provi
 ...
 ```
 
-#### Create application route and add ApplicationRouteMixin mixin
+#### Add ApplicationRouteMixin
 
 Generate an application route:
+
 ```bash
 $ ember g route application
 ```
+
 Include the `ApplicationRouteMixin` that ember-simple-auth provides, as shown below:
 
 ```javascript
@@ -48,11 +52,10 @@ import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mi
 export default Ember.Route.extend(ApplicationRouteMixin, {
 });
 ```
-EXPLAIN MORE?
 
-#### Create login route and add AuthmakerLoginRoute mixin
+#### Add AuthmakerLoginRoute
 
-Generate a route called 'login' and add the `AuthmakerLoginRoute` mixin and our Authmaker configuration from `config/environment.js`.
+Generate a route called **'login'** and add the `AuthmakerLoginRoute` mixin and our Authmaker configuration from `config/environment.js`.
 
 ```bash
 $ ember g route login
@@ -70,9 +73,9 @@ export default Ember.Route.extend(AuthmakerLoginRoute, {
 });
 ```
 
-EXPLAIN MORE about how this 'login' route functions as a tool for Authmaker....
+TODO: EXPLAIN MORE about how this 'login' route functions as a tool for Authmaker....
 
-#### Create application controller and add login/logout actions
+#### Add login/logout actions
 
 Generate a controller for the application route:
 
@@ -80,7 +83,7 @@ Generate a controller for the application route:
 $ ember g controller application
 ```
 
-In this controller, add the actions 'login' and 'logout' as shown below:
+In this controller, add the actions **'login'** and **'logout'** as shown below:
 
 ```javascript
 \\ app/controllers/application.js
@@ -121,9 +124,9 @@ These actions are placed in the application controller so we can call them from 
 </main>
 ```
 
-#### Add DataAdapterMixin to application adapter
+#### Add DataAdapterMixin
 
-In order to automatically include authorization headers on all outgoing requests to the server, we need to include the DataAdapterMixin provided by ember-simple-auth in our application adapter. Add the following to your application adapter:
+In order to automatically include authorization headers on all outgoing requests to the server, we need to include the DataAdapterMixin provided by ember-simple-auth in our application adapter. Add the following to `app/adapters/application.js`:
 
 ```javascript
 \\ app/adapters/application.js
