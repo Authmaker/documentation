@@ -1,6 +1,9 @@
-## Create your routes
+---
+title: Create your routes
+---
 
-Authmaker's `express-autoroute-json` package will create your routes for you.....EXPLAIN PACKAGE MORE HERE.
+Authmaker's `express-autoroute-json` package will create your routes for you. It has already been installed automatically by the project generator, so you don't need to install it again. Using the `server/routes/v1/example.js` file as a guide, create a new file to define the routes for our `post` model:
+
 ```javascript
 // server/routes/v1/post.js
 
@@ -18,4 +21,5 @@ module.exports.autoroute = autorouteJson({
   delete: {},
 });
 ```
-EXPLAIN MORE HERE about this default behaviour and how now we can perform CRUD actions for posts. And that we have not yet added authentication or authorisation, which is in the next steps.
+
+TODO: EXPLAIN PACKAGE AND WHAT IS HAPPENING IN MORE DETAIL HERE
