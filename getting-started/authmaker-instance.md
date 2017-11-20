@@ -15,10 +15,10 @@ Since our app is still in development and not hosted online yet, this can be a p
 TODO: EXPLAIN here about the other social logins and their steps??
 
 #### Database Credentials
-As mentioned in the previous step, we need to provide some information about our mLab sandbox.
+These are the database details provided by mLab (the same ones we used to generate our backend server).
 
 - **Database Name & Port:**
-Here we will use the information provided by mLab (see previous step). In this example our database name is `my-blog` and the port is `27017`.
+Here we will use the information provided by mLab (when we created our database). In this example our database name is `my-blog` and the port is `27017`.
 
 - **User & Password:**
 Input the user and password we created for our database in the previous step. (Note: These are not your personal mLab account credentials.)
