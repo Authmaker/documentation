@@ -12,14 +12,14 @@ Before we start the server and see our application in action, we need to define 
 
 Adding authentication to a route is easy, simply include `authentication: authmakerVerifyExpress.mongo()` in your route and Authmaker handles the rest. Since we want only authenticated users to be able to create, update, or delete posts, we will include this authentication on all of those routes below.
 
-Similarly, TODO: EXPLAIN MORE HERE ABOUT WHAT THE AUTHORIZATION IS DOING EXACTLY.
+Similarly, we need to include authorization rules for certain routes. An authenticated user should only be permitted to edit or delete their own posts, no one else's. We include specifications for authorization on the 'update' and 'delete' routes below. TODO: Explain in one or two sentences what is happening with the authorization hook.
 
 ```javascript
 // server/routes/v1/post.js
 
 const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');
-const models = require('../../../models').models;
+const { models } = require('../../../models');
 
 module.exports.autoroute = autorouteJson({
   model: models.post,
@@ -65,11 +65,28 @@ module.exports.autoroute = autorouteJson({
 });
 ```
 
-#### Start your application
+You will notice above in the 'create' route, we assign the current user as the author of the newly created post. After a user logs in, each request to the server will be sent with the user's token that allows the server to authenticate them. Authmaker's express-autoroute-json package provides a `preMiddleware()` hook that allows us to access the request and response objects. We use this hook to attach a new author property onto the request with the value of the current user id. For more detailed info on using middleware, see the Express [documentation](http://expressjs.com/en/guide/using-middleware.html). TODO: review this statement - is there a better way to say this? Is this correct?
 
-Now we are ready to go! To start your backend application, run `npm start` in your backend directory. PM2 will keep the server running for us. Then switch to your frontend Ember application directory and run `ember server` to start your Ember app.
+#### Add a route for Users
 
-#### Create a user and login!
+Since our post model has an 'author' attribute that is linked to our Users, Ember Data will automatically make a request to a dedicated users route if we include the author's information when displaying a post. Authmaker gives access to it's User model through the `authmakerCommon` object. Create a new routes file called `server/routes/v1/user.js` for the existing User model as shown below:
 
-Clicking on the login button will redirect you to an Authmaker page allowing you to sign up or login. You can create your first user....
+```javascript
+// server/routes/v1/user.js
+
+const autorouteJson = require('express-autoroute-json');
+const authmakerCommon = require('@authmaker/common');
+
+module.exports.autoroute = autorouteJson({
+  model: authmakerCommon.models.user,
+  resource: 'user',
+
+  attributes: ['email', 'username'], // only use these two attributes when sending response
+
+  find: {}, 
+  // only allow for viewing of user data, no other routes included besides 'find'
+});
+```
+
+The attributes property allows us to specify which attributes of the User object the server will respond with. We only want to expose the user's 'email' and 'username' properties when sending a response. We are not including routes for create, update, or delete. Authmaker handles those actions separately, like login.
 

@@ -16,11 +16,11 @@ Authmaker is built to work with [Ember.js](https://emberjs.com) applications. Th
 ```bash
 $ npm install -g yo
 ```
-#### Stonecircle Express Generator
+#### Authmaker Express Generator
 
 Authmaker uses a dedicated Yeoman generator to create your server application structure.
 ```bash
-$ npm install -g @stonecircle/generator-express
+$ npm install -g @authmaker/generator-express
 ```
 
 #### PM2

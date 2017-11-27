@@ -15,7 +15,7 @@ $ ember install authmaker-ember-simple-auth
 
 #### Add Authmaker config
 
-Open `config/environment.js` and include the configuration details provided by Authmaker when you created your instance. (Make sure to use the  _local_ configuration for now.)
+Open `config/environment.js` and include the configuration details provided by Authmaker when you created your instance. These will be unique to your project. (Make sure to use the  _local_ configuration for now.)
 
 ```javascript
 // config/environment.js
@@ -86,7 +86,7 @@ $ ember g controller application
 In this controller, add the actions **'login'** and **'logout'** as shown below:
 
 ```javascript
-\\ app/controllers/application.js
+// app/controllers/application.js
 
 import Ember from 'ember';
 import Config from 'my-blog/config/environment';
@@ -95,21 +95,22 @@ const { inject: { service } } = Ember;
 
 export default Ember.Controller.extend({
   session: service(),
-    actions: {
-        login() {
-          return this.get('session').authenticate('authenticator:authmaker', Config.authmaker);
-        },
-        logout() {
-          return this.get('session').invalidate();
-        }
+
+  actions: {
+      login() {
+        return this.get('session').authenticate('authenticator:authmaker', Config.authmaker);
+      },
+      logout() {
+        return this.get('session').invalidate();
       }
+    }
 });
 ```
 
 These actions are placed in the application controller so we can call them from our application template. In the example below, we place buttons for login/logout in our header above the application outlet, so they will be visible and functional on all pages of our application.
 
 ```javascript
-\\ app/templates/application.hbs
+// app/templates/application.hbs
 
 <header>
   {{#if session.isAuthenticated}}
@@ -129,7 +130,7 @@ These actions are placed in the application controller so we can call them from 
 In order to automatically include authorization headers on all outgoing requests to the server, we need to include the DataAdapterMixin provided by ember-simple-auth in our application adapter. Add the following to `app/adapters/application.js`:
 
 ```javascript
-\\ app/adapters/application.js
+// app/adapters/application.js
 
 import DS from 'ember-data';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
@@ -141,3 +142,5 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
     authorizer: 'authorizer:application',
 });
 ```
+
+Now that our Ember application is set up to work with Authmaker, we need to add authentication and authorization to our backend routes.

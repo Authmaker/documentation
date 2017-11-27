@@ -19,4 +19,4 @@ export default DS.JSONAPIAdapter.extend({
 });
 ```
 
-Since we are in development and running our server locally, the host will be `http://localhost:3000`. We define `namespace: 'v1'` because our routes are auto-generated using the file structure in our backend app. TODO: EXPLAIN MORE HERE about how it automatically generates routes from file structure?
+Since we are in development and running our server locally, the host will be `http://localhost:3000`. We define `namespace: 'v1'` because our routes are auto-generated using the file structure in our backend app.

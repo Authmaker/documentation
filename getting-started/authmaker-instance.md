@@ -15,15 +15,26 @@ Since our app is still in development and not hosted online yet, this can be a p
 TODO: EXPLAIN here about the other social logins and their steps??
 
 #### Database Credentials
-As mentioned in the previous step, we need to provide some information about our mLab sandbox.
+These are your database details from mLab (the same ones we used to generate our backend server). If you used the Yeoman generator, you can refer to `settings/secure.json` which will contain the database information you previously provided.
 
-- **Database Name & Port:**
-Here we will use the information provided by mLab (see previous step). In this example our database name is `my-blog` and the port is `27017`.
+```javascript
+// settings/secure.json
 
-- **User & Password:**
-Input the user and password we created for our database in the previous step. (Note: These are not your personal mLab account credentials.)
+{
+  "database": {
+    "mongo": {
+      "db": "my-blog",
+      "host": "ds12345.mlab.com",
+      "port": 27017,
+      "user": "my_db_user",
+      "password": "my_db_user_password"
+    }
+  },
 
-- **Database Hosts:**
-Again we will use the mLab information from the previous step. Our database is hosted at `ds123456.mlab.com`.
+ ...
+
+}
+
+```
 
 After successfully creating your Authmaker instance, you will have access to two unique configuration objects, one for development and one for production. We will use these to configure our Ember app to work with Authmaker.

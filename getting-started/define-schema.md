@@ -9,12 +9,10 @@ Similar to defining models with Ember, we need to define the schema for the mode
 
 const mongoose = require('mongoose');
 
-const { Schema } = mongoose;
-
 const schema = new mongoose.Schema({
   title: String,
   body: String,
-  author: { type: Schema.Types.ObjectId, ref: 'User' },
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
 });
 
 module.exports = schema;
