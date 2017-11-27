@@ -28,5 +28,7 @@
       url: "add-authmaker"
     - title: "Configure your routes"
       url: "route-config"
+    - title: "Run server locally"
+      url: "local-development"
     - title: "Deploy"
       url: "deploy"

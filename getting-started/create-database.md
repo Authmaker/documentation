@@ -13,8 +13,8 @@ To connect using the mongo shell:
 
 You won't need to connect using the mongo shell, but you will need to take note of some information we will need in the next step. Using the example shown above, our database details are as follows:
 
-- host: ds123456.mlab.com
-- port: 27017
-- database name: my-blog
+- host: `ds123456.mlab.com`
+- port: `27017`
+- database name: `my-blog`
 
 Next, under the 'Users' tab, create a new user for your database with a password. You will use these credentials to allow Authmaker access to your database, so remember them for later. 

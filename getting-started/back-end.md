@@ -15,7 +15,7 @@ Generate the project's structure using the Authmaker Express Generator for Yeoma
 $ yo @authmaker/express
 ```
 
-The generator will prompt you for the database details mentioned in the previous step. This information will be added to a non-tracked file `settings/secure.json`. 
+The generator will prompt you for the database details mentioned in the previous step. (Remember that the username and password are for the database user you created, _not_ your personal mLab credentials.) This information will be added to a non-tracked file `settings/secure.json`. 
 
 The following application structure will be generated for you:
 

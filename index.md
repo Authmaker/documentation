@@ -1,6 +1,6 @@
 # Overview
 
-Placeholder for general overview of Authmaker, what it does, etc. Possibly list of dependencies?
+Placeholder for general overview of Authmaker, what it does, etc. TODO: Explain the general overview of Authmaker.
 
 # Getting Started Guide
 

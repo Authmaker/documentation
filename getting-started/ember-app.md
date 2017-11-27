@@ -2,7 +2,7 @@
 title: Start with your Ember app
 ---
 
-Authmaker was created to work with Ember applications. Our starting point for this guide is a simple blogging app with two basic models - `posts` and `authors`. The models are defined in our Ember app as follows:
+Authmaker was created to work with Ember applications. Our starting point for this guide is a simple blogging app with two basic models - `posts` and `users`. The models are defined in our Ember app as follows:
 
 ```javascript
 // app/models/post.js

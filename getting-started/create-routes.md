@@ -8,7 +8,7 @@ Authmaker's `express-autoroute-json` package will create your routes for you. It
 // server/routes/v1/post.js
 
 const autorouteJson = require('express-autoroute-json');
-const models = require('../../../models').models;
+const { models } = require('../../../models');
 
 module.exports.autoroute = autorouteJson({
   model: models.post,
