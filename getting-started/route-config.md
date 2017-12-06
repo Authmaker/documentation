@@ -69,7 +69,7 @@ You will notice above in the 'create' route, we assign the current user as the a
 
 #### Add a route for Users
 
-Since our post model has an 'author' attribute that is linked to our Users, Ember Data will automatically make a request to a dedicated users route if we include the author's information when displaying a post. Authmaker gives access to it's User model through the `authmakerVerifyExpress`. Create a new routes file called `server/routes/v1/user.js` for the existing User model as shown below:
+Since our post model has an 'author' attribute that is linked to our Users, Ember Data will automatically make a request to a dedicated users route if we include the author's information when displaying a post. Authmaker gives access to it's User model through `authmakerVerifyExpress`. Create a new routes file called `server/routes/v1/user.js` for the existing User model as shown below:
 
 ```javascript
 // server/routes/v1/user.js
