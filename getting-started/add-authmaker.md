@@ -27,7 +27,7 @@ Open `config/environment.js` and include the configuration details provided by A
       domainUrl: "https://your-app-name.authmaker.com",
       redirectUri: "http://localhost:4200/login",
       clientId: "yourClientId"
-      };;
+      };
   }
 
 ...
