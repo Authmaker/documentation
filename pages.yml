@@ -1,12 +1,12 @@
 - title: "Beginner Guides"
-  url: 'index'
+  url: "index"
   skip_toc: true
   pages:
     - title: "Authmaker Beginner Guides"
       url: ""
 
 - title: "Getting Started"
-  url: 'getting-started'
+  url: "getting-started"
   pages:
     - title: "Prerequisites"
       url: "index"
@@ -32,3 +32,39 @@
       url: "local-development"
     - title: "Deploy"
       url: "deploy"
+
+- title: "Implementing Basic Login"
+  url: "implement-login"
+  pages:
+    - title: "Create a database"
+      url: "create-database"
+    - title: "Create an Authmaker instance"
+      url: "authmaker-instance"
+    - title: "Configure your app"
+      url: "configure-app"
+    - title: "Create login route"
+      url: "login"
+
+- title: "Building a Backend Server"
+  url: "build-backend"
+  pages:
+    - title: "Generate your backend app"
+      url: "generate-backend"
+    - title: "Define the schema"
+      url: "define-schema"
+    - title: "Create your routes"
+      url: "create-routes"
+    - title: "Update application adapter"
+      url: "update-adapter"
+    - title: "Route authentication"
+      url: "route-authentication"
+
+- title: "Customizing routes"
+  url: "customize-routes"
+  pages:
+    - title: "Accessing Authmaker models"
+      url: "authmaker-models"
+    - title: "The 'Me' route"
+      url: "me-route"
+    - title: "Custom middleware"
+      url: "middleware"
