@@ -2,13 +2,15 @@
 title: Update application adapter
 ---
 
-Our Ember application adapter should already have been created when we implemented login with the previous steps.
+The application adapter for your Ember app should already exist after previously implementing login.
 
-Open the same file and specify the host and namespace that Ember Data should use when making requests for data.
+#### Specify your API's host and namespace
 
-Since we are in development and running our server locally, the host will be `http://localhost:3000`. We define `namespace: 'v1'` because our routes are auto-generated using the file structure in our backend app.
+Open the same file, `app/adapters/application.js`, and specify the host and namespace that Ember Data should use when making requests to your API.
 
 ```javascript
+// app/adapters/application.js
+
 import DS from 'ember-data';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
 
@@ -19,3 +21,9 @@ export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
     namespace: 'v1',
 });
 ```
+
+Since we are in development and running our server locally, the host is `http://localhost:3000`.
+
+The namespace is defined as `'v1'` because the routes are auto-generated using the file structure in our backend app. In the previous example we created the route file `server/routes/v1/post.js`, whose parent folder will be included in the url to which we make all requests.
+
+By specifying the host and namespace as we did above, Ember Data will send GET requests for all posts to `http://localhost:3000/v1/posts`, exactly as our backend server expects.

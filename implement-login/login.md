@@ -26,8 +26,6 @@ export default Ember.Route.extend(AuthmakerLoginRoute, {
 
 This route is used solely by Authmaker to connect your application with Authmaker's login and signup tools. You will not need to add any template, controller, or route logic aside from the configuration shown above.
 
-TODO: Explain the login route and how it functions in a more thorough manner?
-
 #### Add login/logout actions
 
 Next, generate a controller for the application route:
@@ -60,7 +58,7 @@ export default Ember.Controller.extend({
 });
 ```
 
-These actions are placed in the application controller so we can call them from our application template. In the example below, we place buttons for login/logout in our header above the application outlet, so they will be visible and functional on all pages of our application.
+These actions are placed in the application controller so we can call them from our application template. In the example below, buttons for login/logout are placed in our header above the application outlet, so they will be visible and functional on all pages of our application.
 
 ```javascript
 // app/templates/application.hbs
@@ -78,4 +76,4 @@ These actions are placed in the application controller so we can call them from 
 </main>
 ```
 
-Now upon starting your application server, users will be able to signup and login to your application in order to view any content that requires an authenticated session.
+Now upon starting your local application server, users will be able to signup and login to your application in order to view any content that requires an authenticated session.

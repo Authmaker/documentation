@@ -2,7 +2,7 @@
 title: Configure your app
 ---
 
-After successfully creating your Authmaker instance, configure your Ember application to work with Authmaker.
+After successfully creating your Authmaker instance, configure your existing Ember application to work with Authmaker.
 
 #### Install addons
 
@@ -24,7 +24,7 @@ Open `config/environment.js` and include the configuration details provided by A
 
  if (environment === 'development') {
       ENV.authmaker = {
-      domainUrl: "https://your-app-name.authmaker.com",
+      domainUrl: "https://my-app-name.authmaker.com",
       redirectUri: "http://localhost:4200/login",
       clientId: "yourClientId"
       };
@@ -55,7 +55,13 @@ export default Ember.Route.extend(ApplicationRouteMixin, {
 
 #### Add DataAdapterMixin
 
-In order to automatically include authorization headers on all outgoing requests to the server, we need to include the DataAdapterMixin provided by ember-simple-auth in our application adapter. Add the following to `app/adapters/application.js`:
+Next, generate an application adapter if you do not already have one:
+
+```bash
+$ ember g adapter application
+```
+
+In order to automatically include authorization headers on all outgoing requests to the server, we need to include the `DataAdapterMixin` provided by ember-simple-auth in our application adapter. Add the following to `app/adapters/application.js`:
 
 ```javascript
 // app/adapters/application.js

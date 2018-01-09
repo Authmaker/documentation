@@ -2,16 +2,18 @@
 title: Generate your backend app
 ---
 
-TODO: Add transition sentences to better bridge "implement login" and "build backend" sections.
+TODO: Introduction paragraph bridging basic login with generating backend...
 
-From the terminal, create a new directory for our backend application and change into it.
+#### Generate app structure with Yeoman
+
+From the terminal, create a new directory for your backend application and change into it.
 
 ```bash
-$ mkdir blog-backend
-$ cd blog-backend
+$ mkdir my-app-backend
+$ cd my-app-backend
 ```
 
-Generate the project's structure using the Authmaker Express Generator for Yeoman with the command below. (Yeoman and the Authmaker Express Generator should already be installed.)
+Generate the project's structure using the **Authmaker Express Generator** for Yeoman with the command below. (Both Yeoman and the Authmaker Express Generator should already be installed. See the [Prerequisites](#) for installation instructions.)
 
 ```bash
 $ yo @authmaker/express
