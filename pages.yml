@@ -11,7 +11,7 @@
     - title: "Overview"
       url: "overview"
     - title: "Prerequisites"
-      url: "index"
+      url: "prerequisites"
 
 - title: "Implementing Basic Login"
   url: "implement-login"
@@ -30,10 +30,8 @@
   pages:
     - title: "Generate your backend app"
       url: "generate-backend"
-    - title: "Define the schema"
-      url: "define-schema"
-    - title: "Create your routes"
-      url: "create-routes"
+    - title: "Define your routes"
+      url: "define-routes"
     - title: "Update application adapter"
       url: "update-adapter"
     - title: "Route authentication"

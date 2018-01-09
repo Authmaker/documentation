@@ -42,3 +42,13 @@ $ npm install
 ```
 
 The generator will also create two example files for reference, `models/example.js` (a model) and `server/routes/v1/example.js` (a route). You can use these for reference and eventually delete them.
+
+#### Running the server locally
+
+To start your backend application's server, simply run:
+
+```bash
+$ npm start
+```
+
+Your defined routes will automatically generate and the server will start on `http://localhost:3000`. Make sure that you have installed [PM2](http://pm2.keymetrics.io/), as the above command will initialize the project manager for you to more easily monitor your server's status.

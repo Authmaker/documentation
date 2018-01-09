@@ -2,11 +2,36 @@
 title: Route authentication
 ---
 
-TODO: Sort out this page...
+Chances are, you do not want your API to be fully accessible to anyone. If we were building a blog, we don't want to allow guests to create or edit the posts that they can read. Additionally, we want to make sure we assign an authenticated user to each created post, so that only the post's author can edit it.
+
+Continuing with the example of a blog application, let's add some authentication and authorization specifications to our **'post'** route.
+
+#### Referencing a User
+
+TODO: Explain referencing a user and update this section
+
+```javascript
+// models/post.js
+
+const mongoose = require('mongoose');
+
+const schema = new mongoose.Schema({
+  body: String,
+  created: Date,
+  author: { type: mongoose.Schema.Types.ObjectId, ref: 'User' },
+});
+
+module.exports = schema;
+module.exports.modelName = 'Post';
+```
+
+In the above example, the post's author is defined as an ObjectId that points to a specific User object in our database. The ObjectId is a special value that MongoDB and Mongoose use to uniquely identify all data. When a user signs up for your application through Authmaker, they are stored in your database as a User model, each with their own ObjectId that can be referenced from other models.
 
 #### Add authorization details to routes
 
-Before we start the server and see our application in action, we need to define which routes require authorization and authentication. Here is the behavior we want from our app:
+TODO: update this section
+
+We need to explicitly define which routes require authorization and authentication. Here is the behavior we want from our app:
 
 - Anyone can view posts. (No authentication or authorization required.)
 - Only registered users who are logged-in can create, update, and delete posts. (Authentication required.)
