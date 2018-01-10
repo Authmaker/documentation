@@ -2,7 +2,9 @@
 title: Generate your backend app
 ---
 
-TODO: Introduction paragraph bridging basic login with generating backend...
+So you've created your Authmaker instance and successfully implemented login for your Ember app - now what? You need to access your data. You need a backend server. And you need an API built for your app's unique needs. With Authmaker, fullstack development using Ember and Node is straightforward, productive, and beginner-friendly.
+
+Authmaker provides the framework and tools to build your custom API, while taking care of messy boilerplate configuration and authentication for you. The project generator makes creating your backend application as easy as a single command. 
 
 #### Generate app structure with Yeoman
 

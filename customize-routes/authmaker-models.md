@@ -2,11 +2,17 @@
 title: Accessing Authmaker models
 ---
 
-TODO: Sort out this page...
+Authmaker uses its own internal models to manage authentication for you. You can access their schema using the `authmakerVerifyExpress` package, which exposes all internal models.
 
-#### Add a route for Users
+A common use case for accessing internal models is a **Users** route.
 
-Since our post model has an 'author' attribute that is linked to our Users, Ember Data will automatically make a request to a dedicated users route if we include the author's information when displaying a post. Authmaker gives access to it's User model through `authmakerVerifyExpress`. Create a new routes file called `server/routes/v1/user.js` for the existing User model as shown below:
+#### Adding a route for Users
+
+TODO: Review and revise this...
+
+Let's say our Ember application is a blog with posts and users. We create a [relationship](https://guides.emberjs.com/current/models/relationships/) between the two models (a post's author is a user) with Ember Data's `belongsTo()` method.
+
+Since our post model has an 'author' attribute that is linked to a User, Ember Data will automatically make a request to a dedicated users route if we use `post.author` in our template. Create a new routes file called `server/routes/v1/user.js` for the existing User model as shown below:
 
 ```javascript
 // server/routes/v1/user.js

@@ -25,7 +25,7 @@
     - title: "Create login route"
       url: "login"
 
-- title: "Building a Backend Server"
+- title: "Building a Backend"
   url: "build-backend"
   pages:
     - title: "Generate your backend app"
