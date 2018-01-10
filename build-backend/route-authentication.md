@@ -2,13 +2,77 @@
 title: Route authentication
 ---
 
-Chances are, you do not want your API to be fully accessible to anyone. If we were building a blog, we don't want to allow guests to create or edit the posts that they can read. Additionally, we want to make sure we assign an authenticated user to each created post, so that only the post's author can edit it.
+Chances are, you do not want your API to be fully accessible to anyone. If we were building a blog, we want to allow guests to read posts, but not to create or edit them. Additionally, we want to make sure we assign an authenticated user to each created post, so that only the post's author can edit it.
 
-Continuing with the example of a blog application, let's add some authentication and authorization specifications to our **'post'** route.
+Continuing with the example of a blog application, let's add some authentication specifications to our **'post'** routes.
 
-#### Referencing a User
+#### Requiring authentication for all routes
 
-TODO: Explain referencing a user and update this section
+In the case that you want _all_ routes for a given model to be accessible only to an authenticated user, simply add `authentication: authmakerVerifyExpress.mongo()` to your route file as shown below. This will automatically handle the verification of all request types and appropriately reject non-authenticated requests.
+
+```javascript
+// server/routes/v1/post.js
+
+const autorouteJson = require('express-autoroute-json');
+const { models } = require('../../../models');
+const authmakerVerifyExpress = require('authmaker-verify-express');
+
+module.exports.autoroute = autorouteJson({
+  model: models.post,
+  resource: 'post',
+
+  // access to ALL 'post' routes is only granted to an authenticated user
+  authentication: authmakerVerifyExpress.mongo(),
+
+  // default CRUD
+  find: {},
+  create: {},
+  update: {},
+  delete: {},
+});
+```
+
+#### Authentication for individual routes
+
+In the case of a blog, we do want to allow guests to _view_ posts. In this situation, authentication requirements are individually specified within each route type definition. In the below example, authentication is only required for creating, updating, and deleting posts.
+
+```javascript
+// server/routes/v1/post.js
+
+const autorouteJson = require('express-autoroute-json');
+const authmakerVerifyExpress = require('authmaker-verify-express');
+const { models } = require('../../../models');
+
+module.exports.autoroute = autorouteJson({
+  model: models.post,
+  resource: 'post',
+
+  // no authentication needed to view posts
+  find: {},  
+
+  create: {
+    // user must be authenticated to create a new post
+    authentication: authmakerVerifyExpress.mongo(),
+  },
+
+  update: {
+    // user must be authenticated to edit a post
+    authentication: authmakerVerifyExpress.mongo(),
+  },
+
+  delete: {
+    // user must be authenticated to delete a post
+    authentication: authmakerVerifyExpress.mongo(),
+    },
+  },
+});
+```
+
+#### Associating a User
+
+After a user logs in to your application with Authmaker, all requests to the server are automatically sent with the appropriate authorization headers to identify the user. In addition to verifying authentication, this allows us to associate the user with any data they create.
+
+In the example below, we add an **'author** property to our **'post'** model schema, in order to declare that the author of a post will be an existing user from our database.
 
 ```javascript
 // models/post.js
@@ -25,21 +89,11 @@ module.exports = schema;
 module.exports.modelName = 'Post';
 ```
 
-In the above example, the post's author is defined as an ObjectId that points to a specific User object in our database. The ObjectId is a special value that MongoDB and Mongoose use to uniquely identify all data. When a user signs up for your application through Authmaker, they are stored in your database as a User model, each with their own ObjectId that can be referenced from other models.
+The post's author is defined as an ObjectId that points to a specific User object in our database. The ObjectId is a special value that MongoDB and Mongoose use to uniquely identify all data. When a user signs up for your application through Authmaker, they are stored in your database as a User model, each with their own ObjectId that can be referenced from other models.
 
-#### Add authorization details to routes
+Now that the schema for our post model is updated, the database is expecting a valid user's ObjectId for its 'author' property. [Middleware](http://expressjs.com/en/guide/using-middleware.html) is used by Express to inspect or modify server requests and responses. `express-autoroute-json` allows us to add our own custom middleware before or after it executes its internal middleware, using the hooks `preMiddleware()` or `postMiddleware()`.
 
-TODO: update this section
-
-We need to explicitly define which routes require authorization and authentication. Here is the behavior we want from our app:
-
-- Anyone can view posts. (No authentication or authorization required.)
-- Only registered users who are logged-in can create, update, and delete posts. (Authentication required.)
-- Only the author of the post can update or delete a post. (Authorization required.)
-
-Adding authentication to a route is easy, simply include `authentication: authmakerVerifyExpress.mongo()` in your route and Authmaker handles the rest. Since we want only authenticated users to be able to create, update, or delete posts, we will include this authentication on all of those routes below.
-
-Similarly, we need to include authorization rules for certain routes. An authenticated user should only be permitted to edit or delete their own posts, no one else's. We include specifications for authorization on the 'update' and 'delete' routes below. TODO: Explain in one or two sentences what is happening with the authorization hook.
+In the example below, we attach the authenticated user's id to any new posts they create using the `preMiddleware()` hook that gives us access to the request object received by the server.
 
 ```javascript
 // server/routes/v1/post.js
@@ -52,44 +106,24 @@ module.exports.autoroute = autorouteJson({
   model: models.post,
   resource: 'post',
 
-  // no authentication/authorization needed to view all posts
   find: {},  
-
   create: {
+    // user must be authenticated to create a new post
+    authentication: authmakerVerifyExpress.mongo(),
+
     // assign the current user as the new post's author
     preMiddleware(req, res, next) {
       req.body.data.attributes.author = req.user.id;
       next();
-    },
-
-    // user must be authenticated to create a new post
-    authentication: authmakerVerifyExpress.mongo(),
   },
-
   update: {
-    // user must be authenticated to edit a post
     authentication: authmakerVerifyExpress.mongo(),
-
-    // user is only authorized to edit their own posts
-    authorisation(req) {
-      return {
-        author: req.user.id,
-      };
-    },
   },
-
   delete: {
-    // user must be authenticated to delete a post
     authentication: authmakerVerifyExpress.mongo(),
-
-    // user is only authorized to delete their own posts
-    authorisation(req) {
-      return {
-        author: req.user.id,
-      };
     },
   },
 });
 ```
 
-You will notice above in the 'create' route, we assign the current user as the author of the newly created post. After a user logs in, each request to the server will be sent with the user's token that allows the server to authenticate them. Authmaker's express-autoroute-json package provides a `preMiddleware()` hook that allows us to access the request and response objects. We use this hook to attach a new author property onto the request with the value of the current user id. For more detailed info on using middleware, see the Express [documentation](http://expressjs.com/en/guide/using-middleware.html). TODO: review this statement - is there a better way to say this? Is this correct?
+Assigning the user's id to all posts they create allows us to not only search posts by author, but we can further protect our API by specifying authorization rules in the next step.

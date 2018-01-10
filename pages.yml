@@ -36,6 +36,8 @@
       url: "update-adapter"
     - title: "Route authentication"
       url: "route-authentication"
+    - title: "Route authorization"
+      url: "route-authorization"
 
 - title: "Customizing routes"
   url: "customize-routes"
@@ -46,3 +48,39 @@
       url: "me-route"
     - title: "Custom middleware"
       url: "middleware"
+    - title: "Query Parameters"
+      url: "query"
+    - title: "Processing Results"
+      url: "process"
+    - title: "Self References"
+      url: "self-references"
+
+- title: "Third Party Integration"
+  url: "third-party"
+  pages:
+    - title: "Stripe"
+      url: "stripe"
+    - title: "Facebook"
+      url: "facebook"
+    - title: "FreeAgent"
+      url: "freeagent"
+
+- title: "Payment Processing"
+  url: "payment"
+  pages:
+    - title: "Paid Accounts"
+      url: "paid-accounts"
+    - title: "Subscriptions"
+      url: "subscriptions"
+
+- title: "Deployment"
+  url: "deployment"
+  pages:
+    - title: "Production database"
+      url: ""
+    - title: "TBD"
+      url: ""
+    - title: "TBD"
+      url: ""
+    - title: "Etc"
+      url: ""
