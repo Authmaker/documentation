@@ -2,17 +2,19 @@
 title: Accessing Authmaker models
 ---
 
-Authmaker uses its own internal models to manage authentication for you. You can access their schema using the `authmakerVerifyExpress` package, which exposes all internal models.
+Authmaker uses its own internal models to manage authentication for you. You can access their schema using the `authmaker-verify-express` package, which exposes all internal models.
 
 A common use case for accessing internal models is a **Users** route.
 
 #### Adding a route for Users
 
-TODO: Review and revise this...
+Let's say you are working on an Ember app that allows users to create posts. Each `post` model has an author property that is associated with a `user` model.
 
-Let's say our Ember application is a blog with posts and users. We create a [relationship](https://guides.emberjs.com/current/models/relationships/) between the two models (a post's author is a user) with Ember Data's `belongsTo()` method.
+If we define a [belongsTo()](https://guides.emberjs.com/current/models/relationships/) relationship between `post.author` and `user`, Ember Data will automatically make a GET request to a dedicated `/users` route if we include a reference like `{{post.author.username}}` in our template.
 
-Since our post model has an 'author' attribute that is linked to a User, Ember Data will automatically make a request to a dedicated users route if we use `post.author` in our template. Create a new routes file called `server/routes/v1/user.js` for the existing User model as shown below:
+In a case like this, you need to create a route for an existing Authmaker internal model, whose schema has already been defined. Do not redefine the schema with a duplicate model file. Instead, access the internal model schema with `authmaker-verify-express` (this will already be pre-installed).
+
+Below is an example of a `/users` route file, where the model is defined with `authmakerVerifyExpress.models.user`:
 
 ```javascript
 // server/routes/v1/user.js
@@ -21,14 +23,20 @@ const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');
 
 module.exports.autoroute = autorouteJson({
+  // get the model from authmaker-verify-express
   model: authmakerVerifyExpress.models.user,
   resource: 'user',
 
-  attributes: ['email', 'username'], // only use these two attributes when sending response
+  // only use these two attributes when sending response
+  attributes: ['email', 'username'],
 
+  // only allow for viewing of user data, do not create routes for any other request types
   find: {},
-  // only allow for viewing of user data, no other routes included besides 'find'
 });
 ```
 
-The attributes property allows us to specify which attributes of the User object the server will respond with. We only want to expose the user's 'email' and 'username' properties when sending a response. We are not including routes for create, update, or delete. Authmaker handles those actions separately, like login.
+#### Filtering attributes and limiting request types
+
+It is important to note that we **do not** want to expose the _entire_ user object. We can trim the server's response object by including an array of selected attributes to expose. In the example above, the server will respond to all requests with a `user` object that only has two attributes besides the id, **email** and **username**.
+
+In almost _all_ cases, you do _not_ want to allow **create**, **update**, or **delete** request types on any route for Authmaker core models. Authmaker handles these actions for you separately and securely, like login. `express-autoroute-json` will only generate the route types that you explicitly define (**find**, **create**, **update**, **delete**). The above example route file only includes a definition for **find** routes, ensuring that the exposed data is read-only.

@@ -48,4 +48,4 @@ module.exports.autoroute = autorouteJson({
 
 The above example is the most basic implementation of route creation with `express-autoroute-json`. Upon starting your backend application, it will automatically generate dedicated routes for all CRUD actions on posts. Making a GET request to `/posts` or `/posts/1` will now return the appropriate data from your database.
 
-Additionally, you can limit your route definitions to certain request types. To completely forbid a particular request type, such as DELETE, simply omit the key for `delete: {}` from your route file.
+Additionally, you can limit your route definitions to certain request types. `express-autoroute-json` will only generate the route types that you explicitly define (**find**, **create**, **update**, **delete**). To completely forbid a particular request type, such as DELETE, simply omit the key for `delete: {}` from your route file.

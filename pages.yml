@@ -48,7 +48,7 @@
       url: "me-route"
     - title: "Custom middleware"
       url: "middleware"
-    - title: "Query Parameters"
+    - title: "Query Parameters & Filtering"
       url: "query"
     - title: "Processing Results"
       url: "process"
