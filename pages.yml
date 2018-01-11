@@ -44,7 +44,7 @@
   pages:
     - title: "Accessing Authmaker models"
       url: "authmaker-models"
-    - title: "The 'Me' route"
+    - title: "The 'me' route"
       url: "me-route"
     - title: "Custom middleware"
       url: "middleware"
