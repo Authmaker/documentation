@@ -2,4 +2,8 @@
 title: Custom Middleware
 ---
 
-TODO: Explain custom middleware and hooks 'preMiddleware' 'postMiddleware' here
+Authmaker's package `express-autoroute-json` relies heavily on the Express.js concept of
+
+#### Pre-Middleware
+
+#### Post-Middleware
