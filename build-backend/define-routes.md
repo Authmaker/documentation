@@ -2,7 +2,9 @@
 title: Define your routes
 ---
 
-Authmaker's generator creates a fully functioning application structure for your backend server. To build your API, simply define your schema and routes. Authmaker's package `express-autoroute-json` does the heavy lifting and generates your routes for you.
+Authmaker's generator creates a fully functioning application structure for your backend server. To build your API, simply define your **schema** (models of your data) and **routes**.
+
+[Routes](http://expressjs.com/en/guide/routing.html) determine how your app will respond to requests sent to a particular endpoint. With Authmaker's `express-autoroute-json` package, you define all routes for a given resource in a single, declarative file. Authmaker handles the heavy lifting and your routes are generated for you at runtime.
 
 #### Define your schema
 
@@ -25,6 +27,8 @@ module.exports.modelName = 'Post';
 ```
 
 #### Create your routes
+
+
 
 Authmaker's `express-autoroute-json` package will create your routes for you. It has already been installed by the project generator, so you don't need to install it again. Using the `server/routes/v1/example.js` file as a guide, create a new file to define the routes for the `post` model we created in the previous step:
 
