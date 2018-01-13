@@ -10,8 +10,7 @@ Continuing with the example of a blog application, let's add some authentication
 
 In the case that you want _all_ routes for a given model to be accessible only to an authenticated user, simply add `authentication: authmakerVerifyExpress.mongo()` to your route file as shown below. This will automatically handle the verification of all request types and appropriately reject non-authenticated requests.
 
-```javascript
-// server/routes/v1/post.js
+```javascript {data-filename=server/routes/v1/post.js}
 
 const autorouteJson = require('express-autoroute-json');
 const { models } = require('../../../models');
@@ -36,8 +35,7 @@ module.exports.autoroute = autorouteJson({
 
 In the case of a blog, we do want to allow guests to _view_ posts. In this situation, authentication requirements are individually specified within each route type definition. In the below example, authentication is only required for creating, updating, and deleting posts.
 
-```javascript
-// server/routes/v1/post.js
+```javascript {data-filename=server/routes/v1/post.js}
 
 const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');
@@ -74,8 +72,7 @@ After a user logs in to your application with Authmaker, all requests to the ser
 
 In the example below, we add an **'author** property to our **'post'** model schema, in order to declare that the author of a post will be an existing user from our database.
 
-```javascript
-// models/post.js
+```javascript {data-filename=models/post.js}
 
 const mongoose = require('mongoose');
 
@@ -95,8 +92,7 @@ Now that the schema for our post model is updated, the database is expecting a v
 
 In the example below, we attach the authenticated user's id to any new posts they create using the `preMiddleware()` hook that gives us access to the request object received by the server.
 
-```javascript
-// server/routes/v1/post.js
+```javascript {data-filename=server/routes/v1/post.js}
 
 const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');

@@ -17,8 +17,7 @@ We can choose to require authorization for _all_ routes for a given model, in th
 
 The example below demonstrates how you would authorize a user to only view and edit their _own_ profile object.  
 
-```javascript
-// server/routes/v1/profile.js
+```javascript {data-filename=server/routes/v1/profile.js}
 
 const autorouteJson = require('express-autoroute-json');
 const { models } = require('../../../models');
@@ -53,8 +52,7 @@ To demonstrate adding authorization to selected individual routes, let's continu
 
 An authenticated user should only be authorized to edit or delete their _own_ posts, no one else's. We include those specifications for authorization on the 'update' and 'delete' routes below, by only exposing posts with an 'author' property that matches the user's id.
 
-```javascript
-// server/routes/v1/post.js
+```javascript {data-filename=server/routes/v1/post.js}
 
 const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');

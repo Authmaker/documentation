@@ -8,8 +8,7 @@ The application adapter for your Ember app should already exist after previously
 
 Open the same file, `app/adapters/application.js`, and specify the host and namespace that Ember Data should use when making requests to your API.
 
-```javascript
-// app/adapters/application.js
+```javascript {data-filename=app/adapters/application.js}
 
 import DS from 'ember-data';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';

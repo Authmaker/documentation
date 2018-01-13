@@ -17,8 +17,7 @@ $ ember install authmaker-ember-simple-auth
 
 Open `config/environment.js` and include the configuration details provided by Authmaker when you created your instance. These will be unique to your project. (Make sure to use the  _local_ configuration while in development.)
 
-```javascript
-// config/environment.js
+```javascript {data-filename=config/environment.js}
 
 ...
 
@@ -43,8 +42,7 @@ $ ember g route application
 
 Include the `ApplicationRouteMixin` that ember-simple-auth provides, as shown below:
 
-```javascript
-// app/routes/application.js
+```javascript {data-filename=app/routes/application.js}
 
 import Ember from 'ember';
 import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
@@ -63,8 +61,7 @@ $ ember g adapter application
 
 In order to automatically include authorization headers on all outgoing requests to the server, we need to include the `DataAdapterMixin` provided by ember-simple-auth in our application adapter. Add the following to `app/adapters/application.js`:
 
-```javascript
-// app/adapters/application.js
+```javascript {data-filename=app/adapters/application.js}
 
 import DS from 'ember-data';
 import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';

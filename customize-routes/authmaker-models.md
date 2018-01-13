@@ -16,8 +16,7 @@ In a case like this, you need to create a route for an existing Authmaker intern
 
 Below is an example of a `/users` route file, where the model is defined with `authmakerVerifyExpress.models.user`:
 
-```javascript
-// server/routes/v1/user.js
+```javascript {data-filename=server/routes/v1/user.js}
 
 const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');
@@ -27,7 +26,7 @@ module.exports.autoroute = autorouteJson({
   model: authmakerVerifyExpress.models.user,
   resource: 'user',
   authentication: authmakerVerifyExpress.mongo(),
-  
+
 
   // only use these two attributes when sending response
   attributes: ['email', 'displayName'],

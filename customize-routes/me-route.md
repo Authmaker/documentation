@@ -34,8 +34,7 @@ When a request to the server is authenticated by Authmaker, the current user's O
 
 Inside the hook we have access to the both the request id _and_ the request object, which includes the current user's id. If the request id is **'me'**, we simply return the current user's id instead. Instead of querying the database for a user with an id of 'me', which is invalid, the server will query the database with our new id value, `req.user.id`. The response, if authorized, will include the _current_ user's `email` and `displayName` attributes.
 
-```javascript
-// server/routes/v1/user.js
+```javascript {data-filename=server/routes/v1/user.js}
 
 const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');

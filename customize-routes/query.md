@@ -10,8 +10,7 @@ The `query()` function receives the Express request object as the only parameter
 
 In the below example, if a request for `messages` includes query parameters such as `GET /messages?label=unread`, the function will return a Mongo query document asking for all messages with the label 'unread'.
 
-```javascript
-// server/routes/v1/message.js
+```javascript {data-filename=server/routes/v1/message.js}
 
 module.exports.autoroute = autorouteJson({
   model: Message,
@@ -42,8 +41,7 @@ GET /shirts?color=blue&maxCost=100&minCost=50&size=XL
 
 Our `query()` function needs to return a query document for blue shirts in size XL with a cost between $50 and $100. Using Mongo's query selectors, we can evaluate comparisons like 'greater-than-or-equal' ($gte). In the example below, we return a query document that will filter results to only those that match the specified size, color, and cost range:
 
-```javascript
-// server/routes/v1/message.js
+```javascript {data-filename=server/routes/v1/message.js}
 
 module.exports.autoroute = autorouteJson({
   model: Message,
