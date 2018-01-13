@@ -2,13 +2,23 @@
 title: Custom Middleware
 ---
 
-TODO: Figure out how to better introduce this....with different example...and go through and edit the chaos
+Authmaker uses internal middleware to configure your application's routes as they have been defined. [Middleware](http://expressjs.com/en/guide/using-middleware.html) are functions used by Express to run code and inspect or modify server requests and responses. Think of your routes as a stack of middleware functions that execute sequentially (e.g. first perform authentication, then perform authorization, then...etc etc).
 
-[Middleware](http://expressjs.com/en/guide/using-middleware.html) is used by Express to inspect or modify server requests and responses. `express-autoroute-json` allows us to add our own custom middleware before or after it executes its internal middleware, using the hooks `preMiddleware()` or `postMiddleware()`.
+When your routes are generated, Authmaker handles your middleware configuration for you. However, `express-autoroute-json` allows us to add our own custom middleware before or after it executes its internal middleware, using the hooks `preMiddleware()` or `postMiddleware()`.
 
-#### preMiddleware
+#### preMiddleware()
 
-Pre-middleware happens before any work has been done with mongo but **after** authentication and authorization. The intention of pre-middleware is so that you might alter the request's body before it is passed into the rest of the system e.g. to translate a parameter or add extra data that the frontend didn't know about like the logged in user's email.
+When included inside your route definitions, the `preMiddleware()` function will run before any work is done with Mongo (your database) but **after** authentication and authorization. The intention of pre-middleware is so that you might alter the request's body before it is passed into the rest of the system, e.g. to translate a parameter or attach additional data attributes.
+
+```javascript
+preMiddleware(req, res, next) {
+   // do your magic here
+   // always call next() to continue execution of middleware
+   next();
+}
+```
+
+A good example of using `preMiddleware()` is a scenario in which you want to add information about the current user to the request body. In the example below, `preMiddleware()` is used to attach two additional attributes to a new `post` before it is created in the database - **'author'** and **'created_at'**.
 
 ```javascript
 // server/routes/v1/post.js
@@ -20,43 +30,39 @@ const { models } = require('../../../models');
 module.exports.autoroute = autorouteJson({
   model: models.post,
   resource: 'post',
+  authentication: authmakerVerifyExpress.mongo(),
 
   find: {},  
   create: {
-    // user must be authenticated to create a new post
-    authentication: authmakerVerifyExpress.mongo(),
-
-    // assign the current user as the new post's author
+    // before creating a new post in the database...
     preMiddleware(req, res, next) {
+      // assign the current user as the post's author
       req.body.data.attributes.author = req.user.id;
+
+      // add at 'created_at' attribute with the current timestamp
+      req.body.data.attributes.created_at = new Date();
+
+      // always call next() to continue execution of middleware
       next();
   },
-  update: {
-    authentication: authmakerVerifyExpress.mongo(),
-  },
-  delete: {
-    authentication: authmakerVerifyExpress.mongo(),
-    },
+  update: {},
+  delete: {},
   },
 });
 ```
 
-#### postMiddleware
+#### postMiddleware()
 
-Post-middleware happens **after all work is done** so the action has been committed to the database. For this reason the find action **does not have a postMiddleware** because it does not make sense to do anything after a find has already been sent to the user.
+Post-middleware happens _after_ all work is done, so the action **has already been committed to your database** and the response has been sent. For this reason, the 'find' action _does not_ have a postMiddleware() hook, because it does not make sense to do anything after a 'find' response has already been sent to the user. The hook is only available to use for 'create', 'update', and 'delete' routes.
 
-Post-middleware is also only run **on a successful http request** and will be skipped over in the event of an error.
+`postMiddleware()` is **only** run on a successful http request and will be skipped over in the event of an error. Note that it will run after the response has already been sent, so be careful not to send headers again.
 
 ```javascript
-// server/routes/v1/
-module.exports.autoroute = autorouteJson({
-  model: Project,
-  create: {
-    postMiddleware(req, res, next) {
-       // do your magic here
-    }
-  },
-  find: {},
-});
+postMiddleware(req, res, next) {
+   // do your magic here
+   // always call next() to continue execution of middleware
+   next();
+}
 ```
-**Note:** the response has already been sent to the user so be careful not to send headers again.
+
+TODO: Include example use case for postMiddleware

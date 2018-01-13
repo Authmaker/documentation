@@ -28,9 +28,17 @@ module.exports.modelName = 'Post';
 
 #### Create your routes
 
+Authmaker's `express-autoroute-json` package will create your routes for you. It has already been installed by the project generator, so you don't need to install it again. Traditionally, Express routes are individually defined using:
 
+```javascript
+app.get('/blah', blahHandlerFunction);
+```
 
-Authmaker's `express-autoroute-json` package will create your routes for you. It has already been installed by the project generator, so you don't need to install it again. Using the `server/routes/v1/example.js` file as a guide, create a new file to define the routes for the `post` model we created in the previous step:
+For complex applications with many resources, managing route definitions and handlers like this quickly becomes repetitive, convoluted, and cumbersome. `express-autoroute-json` lets you define all routes for a given resource in a single file, using the declarative action blocks `find`, `create`, `update`, and `delete`.
+
+Simply including the block `find: {}` in your route file will generate fully functioning 'Find All' and 'Find By Id' endpoints for accessing your database - no configuration needed.
+
+Using the `server/routes/v1/example.js` file as a guide, create a new file to define the routes for the `post` model we created in the previous step:
 
 ```javascript
 // server/routes/v1/post.js
@@ -52,4 +60,4 @@ module.exports.autoroute = autorouteJson({
 
 The above example is the most basic implementation of route creation with `express-autoroute-json`. Upon starting your backend application, it will automatically generate dedicated routes for all CRUD actions on posts. Making a GET request to `/posts` or `/posts/1` will now return the appropriate data from your database.
 
-Additionally, you can limit your route definitions to certain request types. `express-autoroute-json` will only generate the route types that you explicitly define (**find**, **create**, **update**, **delete**). To completely forbid a particular request type, such as DELETE, simply omit the key for `delete: {}` from your route file.
+Additionally, you can limit your route definitions to certain request types. `express-autoroute-json` will only generate the route types that you explicitly define. To completely forbid a particular request type, such as DELETE, simply omit the entire block `delete: {}` from your route file.
