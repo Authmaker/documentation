@@ -58,8 +58,6 @@
 - title: "Third Party Integration"
   url: "third-party"
   pages:
-    - title: "Stripe"
-      url: "stripe"
     - title: "Facebook"
       url: "facebook"
     - title: "FreeAgent"
@@ -70,8 +68,8 @@
   pages:
     - title: "Paid Accounts"
       url: "paid-accounts"
-    - title: "Subscriptions"
-      url: "subscriptions"
+    - title: "Plans & Subscriptions"
+      url: "plans"
 
 - title: "Deployment"
   url: "deployment"
