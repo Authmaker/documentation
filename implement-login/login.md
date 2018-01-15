@@ -12,8 +12,7 @@ Generate a route called **'login'** and add the `AuthmakerLoginRoute` mixin and 
 $ ember g route login
 ```
 
-```javascript
-// app/routes/login.js
+```javascript {data-filename=app/routes/login.js}
 
 import Ember from 'ember';
 import AuthmakerLoginRoute from 'authmaker-ember-simple-auth/mixins/login-route';
@@ -36,8 +35,7 @@ $ ember g controller application
 
 In this controller, add the actions **'login'** and **'logout'** as shown below:
 
-```javascript
-// app/controllers/application.js
+```javascript {data-filename=app/controllers/application.js}
 
 import Ember from 'ember';
 import Config from 'my-blog/config/environment';

@@ -12,8 +12,7 @@ Similar to defining models with Ember, we need to define the schema for the mode
 
 Let's say we are working on a blog and need to perform CRUD actions on posts. In the models folder, create `post.js` and define the schema for the **post** model as shown below. You can use the generated file `models/example.js` for formatting reference.
 
-```javascript
-// models/post.js
+```javascript {data-filename=models/post.js}
 
 const mongoose = require('mongoose');
 
@@ -40,8 +39,7 @@ Simply including the block `find: {}` in your route file will generate fully fun
 
 Using the `server/routes/v1/example.js` file as a guide, create a new file to define the routes for the `post` model we created in the previous step:
 
-```javascript
-// server/routes/v1/post.js
+```javascript {data-filename=server/routes/v1/post.js}
 
 const autorouteJson = require('express-autoroute-json');
 const { models } = require('../../../models');

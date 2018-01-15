@@ -20,8 +20,7 @@ preMiddleware(req, res, next) {
 
 A good example of using `preMiddleware()` is a scenario in which you want to add information about the current user to the request body. In the example below, `preMiddleware()` is used to attach two additional attributes to a new `post` before it is created in the database - **'author'** and **'created_at'**.
 
-```javascript
-// server/routes/v1/post.js
+```javascript {data-filename=server/routes/v1/post.js}
 
 const autorouteJson = require('express-autoroute-json');
 const authmakerVerifyExpress = require('authmaker-verify-express');
