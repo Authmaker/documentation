@@ -11,17 +11,6 @@ Choose a name for this project instance. This will be included in the url used t
 #### Application Domain & Name
 While your app is still in development and not hosted online yet, these can be placeholders that will change later. (example: 'www.placeholder-app-domain.com' and 'My Placeholder App Name')
 
-#### Social Login Options
-Authmaker provides optional third-party authentication integration. You will need to provide the appropriate developer credentials when activating additional social logins.
-
-##### Facebook
-
-TODO: Explain Facebook credentials/steps here.
-
-##### FreeAgent
-
-TODO: Explain FreeAgent credentials/steps here.
-
 #### Database Credentials
 These are your database details from mLab (created in the previous step). Remember that the username and password are for the database user you created for Authmaker, _not_ your personal mLab credentials.
 
