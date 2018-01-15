@@ -14,7 +14,7 @@ With Authmaker, adding a 'me' route to your API is done using the `translateId()
 
 #### Translating the ID
 
-Authmaker's `express-autoroute-json` package provides a `translateId()` method that allows you to access the id on all requests for individual records. Using this hook, we can inspect the request object and alter the id _before_ it is used to query your database. This is helpful when the request id is not a Mongo ObjectID, like a request for `/users/me`.
+The library `express-autoroute-json` provides a `translateId()` method that allows you to access the id on all requests for individual records. Using this hook, we can inspect the request object and alter the id _before_ it is used to query your database. This is helpful when the request id is not a Mongo ObjectID, like a request for `/users/me`.
 
 ```javascript
 translateId(id, req) {
