@@ -6,12 +6,12 @@ Even if a user is authenticated, there will likely be content in your app that y
 
 #### Requiring authorization for all routes
 
-We can choose to require authorization for _all_ routes for a given model, in the same way as authentication. Inside the `authorisation(req)` hook, use the request object to determine how you limit access to the data.
+We can choose to require authorization for _all_ routes for a given model, in the same way as authentication. Inside the `authorisation(req)` hook, use the request object to determine how you limit access to the data. The [query object](https://docs.mongodb.com/manual/tutorial/query-documents/) will define the results your database returns.
 
 ```javascript
   authorisation(req) {
-    // return only the data you wish to grant access to here
-    // for example, using the req.user.id to query specific data
+    // return a query object here
+    // e.g. using the req.user.id to only query data created by the user
   }
 ```
 
@@ -32,7 +32,7 @@ module.exports.autoroute = autorouteJson({
 
 
   // only authorize access to the profile object belonging to the user
-  // by returning the profile with a user property that matches the req.user.id
+  // by querying a profile with a user property that matches the req.user.id
   authorisation(req) {
     return {
           user: req.user.id,
