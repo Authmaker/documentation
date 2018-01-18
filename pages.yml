@@ -8,8 +8,8 @@
 - title: "Getting Started"
   url: "getting-started"
   pages:
-    - title: "Overview"
-      url: "overview"
+    - title: "What is Authmaker?"
+      url: "what-is-authmaker"
     - title: "Prerequisites"
       url: "prerequisites"
 
