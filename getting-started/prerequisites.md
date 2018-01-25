@@ -2,6 +2,8 @@
 title: Prerequisites
 ---
 
+Before you start building with Authmaker, make sure you have the following packages installed on your computer:
+
 #### Ember.js
 
 Authmaker is built to work with [Ember.js](https://emberjs.com) applications. These guides will show you how to take an existing Ember application and use Authmaker to easily implement authentication and build your backend server and database. Authmaker is meant to be beginner friendly, but assumes a working knowledge of building with Ember and Javascript. The Ember [guides](https://guides.emberjs.com) are a fantastic resource for all Ember-related questions.

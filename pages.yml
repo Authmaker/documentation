@@ -2,14 +2,14 @@
   url: "index"
   skip_toc: true
   pages:
-    - title: "Authmaker Beginner Guides"
+    - title: "Guides"
       url: ""
 
 - title: "Getting Started"
   url: "getting-started"
   pages:
-    - title: "What is Authmaker?"
-      url: "what-is-authmaker"
+    - title: "Overview"
+      url: "overview"
     - title: "Prerequisites"
       url: "prerequisites"
 
@@ -74,11 +74,7 @@
 - title: "Deployment"
   url: "deployment"
   pages:
-    - title: "Production database"
-      url: ""
-    - title: "TBD"
-      url: ""
-    - title: "TBD"
-      url: ""
-    - title: "Etc"
-      url: ""
+    - title: "Production Databases"
+      url: "production-databases.md"
+    - title: "Deploying with Google Cloud"
+      url: "gcloud-deploy.md"
