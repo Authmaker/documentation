@@ -74,7 +74,9 @@
 - title: "Deployment"
   url: "deployment"
   pages:
-    - title: "Production Databases"
-      url: "production-databases.md"
     - title: "Deploying with Google Cloud"
-      url: "gcloud-deploy.md"
+      url: "gcloud-deploy"
+    - title: "SSL Configuration"
+      url: "ssl-configuration"
+    - title: "Production Databases"
+      url: "production-databases"
