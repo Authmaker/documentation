@@ -16,8 +16,6 @@ We believe that you shouldn't need to be a security expert in order to build sec
 
 Authmaker was designed as part of a fullstack curriculum meant to help you build and deploy apps faster.
 
-Etc etc etc etc etc.
-
 - **[Ember.js](https://emberjs.com/)** _(frontend)_
 - **[Node.js](https://nodejs.org/en/) & [Express.js](https://expressjs.com/)** _(backend)_
 - **[MongoDB](https://docs.mongodb.com/)** _(database)_
