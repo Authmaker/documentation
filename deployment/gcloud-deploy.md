@@ -12,9 +12,11 @@ You will need to own a domain name to use as the URL for your deployed applicati
 
 If you are using a DNS provider other than Google, you will need to verify ownership of the domain through [Google Webmaster Central](https://www.google.com/webmasters/verification/). If you created your domain with Google, this step is automatic.
 
+**NOTE:** This deployment method requires deployment to a **subdomain**, such as `www.mydomain.com` or `app.mydomain.com`, instead of the root domain, `mydomain.com`.
+
 #### Create a CNAME record
 
-Navigate to your DNS provider's control panel to access your domain settings. If you are using Google Domains, select the 'Configure DNS' option for your domain. From here, create a new `CNAME` record that will point your domain to the the Google Storage servers where your app will be hosted, `c.storage.googleapis.com.`.
+Navigate to your DNS provider's control panel to access your domain settings. If you are using Google Domains, select the 'Configure DNS' option for your domain. From here, create a new `CNAME` record that will redirect your subdomain to the the Google Storage servers where your app will be hosted, `c.storage.googleapis.com.`.
 
 It will look something like this:
 
@@ -26,7 +28,7 @@ It will look something like this:
     <th>DATA</th>
   </tr>
   <tr>
-    <td>my-app-domain-name.com</td>
+    <td>www.mydomain.com</td>
     <td>CNAME</td>
     <td>1h</td>
     <td>c.storage.googleapis.com.</td>
@@ -39,7 +41,7 @@ For more information on `CNAME` redirects to Google Cloud Platform, [see the doc
 
 From the Google Cloud console, create a new **project** for this application. Google Cloud Platform organizes your resources into projects - this makes it easy to manage permissions and settings for multiple deployments in one place. For example, _both_ our frontend application _and_ backend server deployments will belong to the same project.
 
-From the navigation menu, select 'Storage' to access your project's Cloud Storage tools. From there, create a new storage **bucket** with the same name as your `CNAME` record. To continue our previous example, we would create a storage bucket with the name `my-app-domain-name.com`.
+From the navigation menu, select 'Storage' to access your project's Cloud Storage tools. From there, create a new storage **bucket** with the same name as your `CNAME` record for your subdomain. To continue our previous example, we would create a storage bucket with the name `www.mydomain.com`.
 
 Keep note of both your project name and bucket name, as we will use them to configure our Ember app for deployment in the next step.
 
