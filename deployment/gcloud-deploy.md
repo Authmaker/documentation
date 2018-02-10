@@ -73,7 +73,7 @@ If you are using a DNS provider other than Google, you will need to verify owner
 
 **NOTE:** This deployment method requires deployment to a **subdomain**, such as `www.mydomain.com` or `app.mydomain.com`, instead of the root domain, `mydomain.com`.
 
-#### Create a CNAME record
+### Create a CNAME record
 
 Navigate to your DNS provider's control panel to access your domain settings. If you are using Google Domains, select the 'Configure DNS' option for your domain. From here, create a new `CNAME` record that will redirect your subdomain to the the Google Storage servers where your app will be hosted, `c.storage.googleapis.com.`.
 
@@ -102,7 +102,11 @@ From the navigation menu, select 'Storage' to access your project's Cloud Storag
 
 Keep note of both your project name and bucket name, as we will use them to configure our Ember app for deployment in the next step.
 
-## Deploy your Ember app
+Next, navigate to your Google Storage 'Browser' view to see all buckets. You should see your frontend application bucket listed, along with some others that have been auto-generated for your backend deployment. At the far right of each bucket listing, you will see a vertical menu that you can click to access **'Edit Website Configuration'**. Click and fill both your **'Main page'** and **'404 (not found) page'** options with `index.html`, since we are about to deploy a single-page app and want any 404 errors to be handled by our Ember app.
+
+Your bucket is now ready for deploying our frontend from the command line.
+
+## Configure your Ember deployment
 
 In your Ember application's directory, install the following packages for deployment:
 
@@ -124,4 +128,80 @@ const productionBucket = '** YOUR BUCKET **';
 module.exports = function(deployTarget) {
   ...
 };
+```
+
+This sets your deployment location for your Ember app.
+
+### Update your Authmaker instance app domain
+
+Make sure your Authmaker instance for this project has the correct url for your production application domain. If you used a placeholder domain when you created your instance, update the value to match your production domain - in the case of this example, the same subdomain we used when naming our Google bucket, `www.mydomain.com`.
+
+After you've updated your application domain, save your changes and click to view your updated _live_ Ember config object. You should see your production domain reflected as part of the object's `redirectUri`. Copy the full object to use for your app.
+
+Open `config/environment.js` and include your unique live config object inside the **production** block. _(Make sure you place it inside the **production** block. We are **not** changing the development block or local config object.)_
+
+```javascript {data-filename=config/environment.js}
+
+...
+
+ if (environment === 'production') {
+      // this object will be *UNIQUE* for your instance
+      ENV.authmaker = {
+      domainUrl: "https://my-app-name.authmaker.com",
+      redirectUri: "https://www.mydomain.com/login",
+      clientId: "yourClientId"
+      };
+  }
+
+...
+```
+
+## Deploy your Ember app
+
+To deploy your frontend application, run the following command from your frontend directory:
+
+```bash
+$ ember deploy production --activate
+```
+
+Your app will build and deploy to your Google storage bucket!
+
+**NOTE:** If you run into any permissions errors from GCloud, you might need to first login via the command line by running:
+
+```bash
+$ gcloud auth application-default login
+```
+
+You will be prompted to login, after which you shouldn't get any permissions errors when you run the deploy command. For more on GCloud command line authentication, see [here](https://cloud.google.com/sdk/gcloud/reference/auth/application-default/login).
+
+## Deployment Iterations
+
+The Authmaker curriculum was designed to be used as part of an iterative development process, continually developing and deploying as your application expands and improves. In the steps above, you updated your app for deployment **_in addition to_** the existing development config. You can continue to develop your application locally without changing any configuration details in the code.
+
+### Running locally
+
+To start your backend application locally, run:
+
+```bash
+$ npm run start-local
+```
+
+To start your Ember frontend locally, run:
+
+```bash
+$ ember serve
+```
+
+### Future deployments
+
+To deploy a new version of your backend app, run:
+
+```bash
+$ gcloud app deploy --project=PROJECT_NAME
+```
+
+To deploy a new version of your frontend Ember app, run:
+
+```bash
+$ ember deploy production --activate
 ```
