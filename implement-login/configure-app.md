@@ -22,6 +22,7 @@ Open `config/environment.js` and include the configuration details provided by A
 ...
 
  if (environment === 'development') {
+      // this object will be *UNIQUE* for your instance
       ENV.authmaker = {
       domainUrl: "https://my-app-name.authmaker.com",
       redirectUri: "http://localhost:4200/login",
