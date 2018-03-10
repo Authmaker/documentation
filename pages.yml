@@ -1,8 +1,8 @@
-- title: "Beginner Guides"
+- title: "the Introduction"
   url: "index"
   skip_toc: true
   pages:
-    - title: "Guides"
+    - title: "Introduction"
       url: ""
 
 - title: "Getting Started"
