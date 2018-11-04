@@ -2,7 +2,7 @@
 
 module.exports = function(environment) {
   let ENV = {
-    modulePrefix: 'documentation',
+    modulePrefix: '@authmaker/documentation',
     environment,
     rootURL: '/',
     locationType: 'trailing-history',
