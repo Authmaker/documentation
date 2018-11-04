@@ -25,8 +25,19 @@ module.exports = function(environment) {
     },
 
     'ember-meta': {
-      description: 'Guides - Built with Guidemaker'
-    }
+      description: 'Authmaker Beginner Documentation'
+    },
+
+    guidemaker: {
+      title: 'Authmaker docs',
+      logo: '/images/logo.svg',
+      copyright: 'Stone Circle Design Limited',
+      social: {
+        github: 'authmaker',
+        twitter: 'authmaker',
+      },
+      sourceRepo: 'https://github.com/authmaker/documentation',
+    },
   };
 
   if (environment === 'development') {
