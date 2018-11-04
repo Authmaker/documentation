@@ -58,9 +58,7 @@ export default Ember.Controller.extend({
 
 These actions are placed in the application controller so we can call them from our application template. In the example below, buttons for login/logout are placed in our header above the application outlet, so they will be visible and functional on all pages of our application.
 
-```javascript
-// app/templates/application.hbs
-
+```javascript {data-filename=app/templates/application.hbs}
 <header>
   {{#if session.isAuthenticated}}
     <button {{action 'logout'}}>Logout</button>
