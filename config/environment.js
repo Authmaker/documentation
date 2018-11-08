@@ -38,6 +38,12 @@ module.exports = function(environment) {
       },
       sourceRepo: 'https://github.com/authmaker/documentation',
     },
+
+    algolia: {
+      algoliaId: 'EUXSOLYEM4',
+      algoliaKey: '17fae2d7d0064205f77c9f69e6efe151',
+      indexName: 'beginner-guides'
+    },
   };
 
   if (environment === 'development') {
