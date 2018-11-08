@@ -29,7 +29,7 @@ module.exports = function(environment) {
     },
 
     guidemaker: {
-      title: 'Authmaker docs',
+      title: 'Authmaker Documentation',
       logo: '/images/logo.svg',
       copyright: 'Stone Circle Design Limited',
       social: {
