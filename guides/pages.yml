@@ -20,9 +20,9 @@
       url: "create-database"
     - title: "Create an Authmaker instance"
       url: "authmaker-instance"
-    - title: "Configure your app"
+    - title: "Create your app"
       url: "configure-app"
-    - title: "Create login route"
+    - title: "Create login button"
       url: "login"
 
 - title: "Building a Backend"

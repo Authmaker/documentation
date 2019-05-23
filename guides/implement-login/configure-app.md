@@ -1,73 +1,56 @@
----
-title: Configure your app
----
+After successfully creating your Authmaker instance, it is time to create your
+app and configure it to use your new Authmaker Instance.
 
-After successfully creating your Authmaker instance, configure your existing Ember application to work with Authmaker.
+## Create your app
 
-#### Install addons
-
-Authmaker works with [ember-simple-auth](https://ember-simple-auth.com/) to allow easy implementation of authentication and authorization in your app. From your Ember application directory, install ember-simple-auth and then authmaker-simple-auth:
+The quickest way to create your new application is to use the following npm init command:
 
 ```bash
-$ ember install ember-simple-auth
-$ ember install authmaker-ember-simple-auth
+npm init ember-app your-amazing-app
 ```
 
-#### Add Authmaker config
+This will create a new application for you in the folder `your-amazing-app`. You can make sure that it has initialised correctly by navigating to that app and starting it:
 
-Open `config/environment.js` and include the configuration details provided by Authmaker when you created your instance. These will be unique to your project. (Make sure to use the  _local_ configuration while in development.)
+```bash
+cd your-amazing-app
+npm start
+```
+
+You should be prompted to visit http://localhost:4200 which should look something like this when you visit it:
+
+![Ember Dummy App](/images/dummy-app.png)
+
+Next we need to install the Authmaker addon.
+
+## Installing Authmaker Simple Auth
+
+To get you started as quickly as possible we provide an Ember Addon that provides a lot of the functionality you would need. It is built to extend [ember-simple-auth](https://ember-simple-auth.com/) to allow easy implementation of authentication and authorization in your app.
+
+From your Ember application directory, install [authmaker-ember-simple-auth](https://github.com/Authmaker/authmaker-ember-simple-auth) as follows:
+
+```bash
+ember install authmaker-ember-simple-auth
+```
+
+This will create a bunch of files in your application for you and update your environment config with example config that you will need to update before the Addon will start working.
+
+### Update Authmaker config
+
+If you open `config/environment.js` you will see that there are sections that will look something like this:
+
 
 ```javascript {data-filename=config/environment.js}
-
-...
-
- if (environment === 'development') {
-      // this object will be *UNIQUE* for your instance
-      ENV.authmaker = {
-      domainUrl: "https://my-app-name.authmaker.com",
-      redirectUri: "http://localhost:4200/login",
-      clientId: "yourClientId"
-      };
-  }
-
-...
+if (environment === 'development') {
+  ENV.authmaker = {
+    domainUrl: 'REPLACE_ME',
+    redirectUri: 'REPLACE_ME',
+    clientId: 'REPLACE_ME'
+  };
+}
 ```
 
-#### Add ApplicationRouteMixin
+You will need to replace these example configurations with the real config for your Authmaker application. To get the real configuration you should [login to your Authmaker dashboard](https://app.authmaker.com/instances) and click the button marked "Local Ember Config":
 
-Generate an application route if you do not already have one:
+![Example Authmaker Instance](/images/instance.png)
 
-```bash
-$ ember g route application
-```
-
-Include the `ApplicationRouteMixin` that ember-simple-auth provides, as shown below:
-
-```javascript {data-filename=app/routes/application.js}
-
-import Ember from 'ember';
-import ApplicationRouteMixin from 'ember-simple-auth/mixins/application-route-mixin';
-
-export default Ember.Route.extend(ApplicationRouteMixin, {
-});
-```
-
-#### Add DataAdapterMixin
-
-Next, generate an application adapter if you do not already have one:
-
-```bash
-$ ember g adapter application
-```
-
-In order to automatically include authorization headers on all outgoing requests to the server, we need to include the `DataAdapterMixin` provided by ember-simple-auth in our application adapter. Add the following to `app/adapters/application.js`:
-
-```javascript {data-filename=app/adapters/application.js}
-
-import DS from 'ember-data';
-import DataAdapterMixin from 'ember-simple-auth/mixins/data-adapter-mixin';
-
-export default DS.JSONAPIAdapter.extend(DataAdapterMixin, {
-    authorizer: 'authorizer:application',
-});
-```
+When you click the button there will be a pop up with your specific config for your Authmaker app and you should replace the example config in the `development` section of your `environment.js` file to reflect this specific config.
